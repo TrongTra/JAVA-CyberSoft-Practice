@@ -1,0 +1,48 @@
+import java.util.Scanner;
+
+public class PersonalIncomeTax {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Nhap ten nguoi nop thue: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Nhap vao tong so thu nhap trong nam (trieu dong): ");
+        double totalIncome = scanner.nextDouble();
+
+        System.out.print("Nhap vao so nguoi phu thuoc: ");
+        int dependents = scanner.nextInt();
+
+        double personalDeduction = 4.0;
+        double dependentDeduction = 1.6 * dependents; 
+        double taxableIncome = totalIncome - personalDeduction - dependentDeduction;
+
+        if (taxableIncome < 0) {
+            taxableIncome = 0;
+        }
+
+        double taxPayable = 0;
+        if (taxableIncome <= 60) {
+            taxPayable = taxableIncome * 0.05;
+        } else if (taxableIncome <= 120) {
+            taxPayable = 60 * 0.05 + (taxableIncome - 60) * 0.10;
+        } else if (taxableIncome <= 210) {
+            taxPayable = 60 * 0.05 + 60 * 0.10 + (taxableIncome - 120) * 0.15;
+        } else if (taxableIncome <= 384) {
+            taxPayable = 60 * 0.05 + 60 * 0.10 + 90 * 0.15 + (taxableIncome - 210) * 0.20;
+        } else if (taxableIncome <= 624) {
+            taxPayable = 60 * 0.05 + 60 * 0.10 + 90 * 0.15 + 174 * 0.20 + (taxableIncome - 384) * 0.25;
+        } else if (taxableIncome <= 960) {
+            taxPayable = 60 * 0.05 + 60 * 0.10 + 90 * 0.15 + 174 * 0.20 + 240 * 0.25 + (taxableIncome - 624) * 0.30;
+        } else {
+            taxPayable = 60 * 0.05 + 60 * 0.10 + 90 * 0.15 + 174 * 0.20 + 240 * 0.25 + 336 * 0.30 + (taxableIncome - 960) * 0.35;
+        }
+
+        
+        //System.out.printf("Nguoi nop thue: %s\n", name);
+        //System.out.printf("Tong thu nhap trong nam: %.2f (trieu dong)\n", totalIncome);
+        //System.out.printf("So nguoi phu thuoc: %d\n", dependents);
+        //System.out.printf("Thu nhap chiu thue: %.2f trieu dong\n", taxableIncome);
+        System.out.printf("\nSo thue thu nhap ca nhan phai nop: %.2f trieu dong\n", taxPayable);
+    }
+}
