@@ -1,0 +1,82 @@
+import java.util.Scanner;
+
+public class AdmissionTest {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Moi ban nhap diem mon thu nhat: ");
+        double score1 = scanner.nextDouble();
+
+        System.out.print("Moi ban nhap diem mon thu hai: ");
+        double score2 = scanner.nextDouble();
+
+        System.out.print("Moi ban nhap diem mon thu ba: ");
+        double score3 = scanner.nextDouble();
+
+        System.out.print("Nhap khu vuc cua thi sinh: \n");
+        System.out.println("A. Khu vuc A");
+        System.out.println("B. Khu vuc B");
+        System.out.println("C. Khu vuc c");
+        System.out.println("X. Khon co khu vuc");
+        char area = scanner.next().charAt(0);
+
+        System.out.print("Nhap doi tuong du thi: \n");
+        System.out.println("1. Doi tuong 1");
+        System.out.println("2. Doi tuong 2");
+        System.out.println("3. Doi tuong 3");
+        System.out.println("0. Khong co doi tuong");
+        int category = scanner.nextInt();
+        
+        System.out.print("Moi ban nhap diem chuan: ");
+        double passingScore = scanner.nextDouble();
+
+        double areaPriority = 0;
+        switch (area) {
+            case 'A':
+                areaPriority = 2;
+                break;
+            case 'B':
+                areaPriority = 1;
+                break;
+            case 'C':
+                areaPriority = 0.5;
+                break;
+            case 'X':
+                areaPriority = 0;
+                break;
+            default:
+                System.out.println("Khu vuc khong hop le!");
+                return;
+        }
+
+        double categoryPriority = 0;
+        switch (category) {
+            case 1:
+                categoryPriority = 2;
+                break;
+            case 2:
+                categoryPriority = 1;
+                break;
+            case 3:
+                categoryPriority = 1;
+                break;
+            case 0:
+                categoryPriority = 0;
+                break;
+            default:
+                System.out.println("Doi tuong khong hop le!");
+                return;
+        }
+
+        double totalPriority = areaPriority + categoryPriority;
+        double totalScore = score1 + score2 + score3 + totalPriority;
+        
+        boolean hasZeroScore = (score1 == 0 || score2 == 0 || score3 == 0);
+
+        if (totalScore >= passingScore && !hasZeroScore) {
+            System.out.println("Ban da dau voi so diem: " + totalScore);
+        } else {
+            System.out.println("Ban da rot voi so diem: " + totalScore);
+        }
+    }
+}
